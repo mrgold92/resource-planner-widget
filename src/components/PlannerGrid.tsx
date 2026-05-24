@@ -26,8 +26,10 @@ export function PlannerGrid({
     onEntryClick,
     onEmptyCellClick
 }: PlannerGridProps): ReactElement {
+    const sectionRef = useRef<HTMLElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
     const [scrollTop, setScrollTop] = useState(0);
+    const [containerWidth, setContainerWidth] = useState<number>(0);
     const normalizedVisibleRows = Math.max(1, Math.floor(visibleResourceRows || 12));
     const shouldVirtualizeRows = resources.length > normalizedVisibleRows;
     const firstVisibleResourceIndex = shouldVirtualizeRows
@@ -48,8 +50,25 @@ export function PlannerGrid({
         "--rpw-resource-column-width": `${Math.max(resourceColumnWidth, 140)}px`,
         "--rpw-day-column-min-width": `${Math.max(dayColumnMinWidth, 72)}px`,
         "--rpw-day-count": days.length,
-        "--rpw-grid-max-height": `${HEADER_HEIGHT + normalizedVisibleRows * RESOURCE_ROW_HEIGHT}px`
+        "--rpw-grid-max-height": `${HEADER_HEIGHT + normalizedVisibleRows * RESOURCE_ROW_HEIGHT}px`,
+        // Explicit pixel width breaks the CSS min-content size propagation to Mendix parent flex items
+        width: containerWidth > 0 ? containerWidth : "100%"
     } as import("react").CSSProperties;
+
+    useEffect(() => {
+        const section = sectionRef.current;
+        if (!section) {
+            return;
+        }
+        const observer = new ResizeObserver(entries => {
+            const width = entries[0]?.contentRect.width;
+            if (width != null && width > 0) {
+                setContainerWidth(width);
+            }
+        });
+        observer.observe(section);
+        return () => observer.disconnect();
+    }, []);
 
     useEffect(() => {
         const scrollElement = scrollRef.current;
@@ -85,6 +104,7 @@ export function PlannerGrid({
 
     return (
         <section
+            ref={sectionRef}
             className={classNames("rpw-planner", `rpw-height-${heightMode}`, className)}
             style={style}
             tabIndex={tabIndex}
