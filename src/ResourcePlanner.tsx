@@ -1,14 +1,14 @@
 import { ReactElement } from "react";
-import { ResourceplannerwidgetContainerProps } from "../typings/ResourceplannerwidgetProps";
+import { ResourcePlannerContainerProps } from "../typings/ResourcePlannerProps";
 import { PlannerGrid } from "./components/PlannerGrid";
 import { FirstDayOfWeek, HeightMode } from "./types";
 import { monthLabel, getMonthDays, startOfLocalDay } from "./utils/dateUtils";
 import { actionFor, normalizeEntries, normalizeResources } from "./utils/mendixValues";
 import { indexEntriesByCell } from "./utils/plannerIndex";
 
-import "./ui/Resourceplannerwidget.css";
+import "./ui/ResourcePlanner.css";
 
-export function Resourceplannerwidget(props: ResourceplannerwidgetContainerProps): ReactElement {
+export function ResourcePlanner(props: ResourcePlannerContainerProps): ReactElement {
     const anchorDate = startOfLocalDay(props.visibleMonthAttribute.value ?? new Date());
     const resourceItems = props.resourcesDatasource.items ?? [];
     const entryItems = props.entriesDatasource?.items ?? [];

@@ -1,4 +1,4 @@
-import { ResourceplannerwidgetPreviewProps } from "../typings/ResourceplannerwidgetProps";
+import { ResourcePlannerPreviewProps } from "../typings/ResourcePlannerProps";
 
 export type Platform = "web" | "desktop";
 
@@ -100,7 +100,7 @@ export type PreviewProps =
     | DatasourceProps;
 
 export function getProperties(
-    _values: ResourceplannerwidgetPreviewProps,
+    _values: ResourcePlannerPreviewProps,
     defaultProperties: Properties /* , target: Platform*/
 ): Properties {
     // Do the values manipulation here to control the visibility of properties in Studio and Studio Pro conditionally.

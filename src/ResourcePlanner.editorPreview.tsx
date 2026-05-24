@@ -5,7 +5,7 @@ import { PlannerEntry, PlannerResource } from "./types";
 import { getMonthDays, localDateKey, monthLabel } from "./utils/dateUtils";
 import { indexEntriesByCell } from "./utils/plannerIndex";
 
-import "./ui/Resourceplannerwidget.css";
+import "./ui/ResourcePlanner.css";
 
 export function preview(): ReactElement {
     const anchor = new Date(2026, 4, 1);
@@ -42,7 +42,7 @@ export function preview(): ReactElement {
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/Resourceplannerwidget.css");
+    return require("./ui/ResourcePlanner.css");
 }
 
 function entry(

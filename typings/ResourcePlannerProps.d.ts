@@ -1,5 +1,5 @@
 /**
- * This file was generated from Resourceplannerwidget.xml
+ * This file was generated from ResourcePlanner.xml
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Framework Team
  */
@@ -19,7 +19,7 @@ export type FirstDayOfWeekEnum = "monday" | "sunday";
 
 export type HeightModeEnum = "auto" | "fill";
 
-export interface ResourceplannerwidgetContainerProps {
+export interface ResourcePlannerContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
@@ -45,7 +45,7 @@ export interface ResourceplannerwidgetContainerProps {
     visibleResourceRows: number;
 }
 
-export interface ResourceplannerwidgetPreviewProps {
+export interface ResourcePlannerPreviewProps {
     /**
      * @deprecated Deprecated since version 9.18.0. Please use class property instead.
      */
