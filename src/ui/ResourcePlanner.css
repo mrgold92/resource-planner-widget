@@ -10,6 +10,8 @@
     --rpw-accent: #2563eb;
     position: relative;
     width: 100%;
+    max-width: 100%;
+    overflow: hidden;
     color: var(--rpw-text);
     font-family: inherit;
 }
