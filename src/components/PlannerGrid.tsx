@@ -56,26 +56,24 @@ export function PlannerGrid({
     } as import("react").CSSProperties;
 
     useEffect(() => {
-        const scrollElement = scrollRef.current;
-        if (!scrollElement) return;
+        const scrollEl = scrollRef.current;
+        if (heightMode !== "fill" || !scrollEl) return;
 
-        // Mendix Atlas Core wraps widgets in .mx-scrollcontainer-wrapper with flex: 1 1 auto
-        // and no height constraint, causing it to grow infinitely and trigger page scrolling.
-        // We need to cap it AND add min-height: 0 to prevent flex item from expanding children.
-        let ancestor = scrollElement.parentElement;
-        while (ancestor) {
-            if (ancestor.classList.contains("mx-scrollcontainer-wrapper")) {
-                ancestor.style.maxHeight = "100vh";
-                ancestor.style.overflowY = "auto";
-                ancestor.style.overflowX = "hidden";
-                ancestor.style.display = "flex";
-                ancestor.style.flexDirection = "column";
-                ancestor.style.minHeight = "0";
-                break;
-            }
-            ancestor = ancestor.parentElement;
-        }
-    }, []);
+        // In fill mode: measure the distance from the scroll container's top edge
+        // to the bottom of the viewport and use that as max-height. This makes the
+        // widget fill exactly the remaining page space without overflowing it.
+        const updateHeight = (): void => {
+            const rect = scrollEl.getBoundingClientRect();
+            const available = window.innerHeight - rect.top;
+            scrollEl.style.maxHeight = `${Math.max(available, 200)}px`;
+        };
+
+        updateHeight();
+
+        const ro = new ResizeObserver(updateHeight);
+        ro.observe(document.documentElement);
+        return () => ro.disconnect();
+    }, [heightMode]);
 
     useEffect(() => {
         const scrollElement = scrollRef.current;
