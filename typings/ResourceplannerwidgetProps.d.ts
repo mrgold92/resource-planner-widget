@@ -42,6 +42,7 @@ export interface ResourceplannerwidgetContainerProps {
     resourceColumnWidth: number;
     dayColumnMinWidth: number;
     heightMode: HeightModeEnum;
+    visibleResourceRows: number;
 }
 
 export interface ResourceplannerwidgetPreviewProps {
@@ -73,4 +74,5 @@ export interface ResourceplannerwidgetPreviewProps {
     resourceColumnWidth: number | null;
     dayColumnMinWidth: number | null;
     heightMode: HeightModeEnum;
+    visibleResourceRows: number | null;
 }

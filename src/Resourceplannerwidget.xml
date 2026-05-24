@@ -110,6 +110,10 @@
                     <enumerationValue key="fill">Fill parent</enumerationValue>
                 </enumerationValues>
             </property>
+            <property key="visibleResourceRows" type="integer" defaultValue="12">
+                <caption>Visible resource rows</caption>
+                <description>Number of resource rows visible before the planner starts virtual scrolling.</description>
+            </property>
         </propertyGroup>
         <propertyGroup caption="Common">
             <systemProperty key="Name"/>

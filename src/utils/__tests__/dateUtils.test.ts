@@ -1,4 +1,4 @@
-import { getMonthDays, localDateKey, startOfLocalDay } from "../dateUtils";
+import { getMonthDays, localDateKey, monthLabel, startOfLocalDay } from "../dateUtils";
 
 describe("dateUtils", () => {
     it("creates one column per day in the visible month", () => {
@@ -28,5 +28,9 @@ describe("dateUtils", () => {
         expect(normalized.getDate()).toBe(9);
         expect(normalized.getHours()).toBe(0);
         expect(normalized.getMinutes()).toBe(0);
+    });
+
+    it("formats month labels in English", () => {
+        expect(monthLabel(new Date(2026, 4, 1))).toBe("May 2026");
     });
 });

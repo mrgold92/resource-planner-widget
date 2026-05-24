@@ -15,7 +15,7 @@ export function localDateKey(date: Date): string {
 }
 
 export function monthLabel(date: Date): string {
-    return new Intl.DateTimeFormat(undefined, { month: "long", year: "numeric" }).format(date);
+    return new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(date);
 }
 
 export function getMonthDays(anchor: Date, firstDayOfWeek: FirstDayOfWeek, showWeekends: boolean): PlannerDay[] {

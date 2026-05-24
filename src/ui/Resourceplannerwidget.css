@@ -24,14 +24,15 @@
     display: grid;
     grid-template-columns: var(--rpw-resource-column-width) repeat(var(--rpw-day-count), minmax(var(--rpw-day-column-min-width), 1fr));
     overflow: auto;
-    max-height: 100%;
+    max-height: var(--rpw-grid-max-height);
     border: 1px solid var(--rpw-border);
     border-radius: 6px;
     background: var(--rpw-cell-bg);
 }
 
 .rpw-header-row,
-.rpw-resource-row {
+.rpw-resource-row,
+.rpw-virtual-spacer-row {
     display: contents;
 }
 
@@ -146,11 +147,25 @@
 
 .rpw-day-cell {
     min-width: var(--rpw-day-column-min-width);
-    min-height: 78px;
+    height: 78px;
     padding: 6px;
     border-right: 1px solid var(--rpw-border);
     border-bottom: 1px solid var(--rpw-border);
     background: var(--rpw-cell-bg);
+}
+
+.rpw-resource-spacer-cell,
+.rpw-day-spacer-cell {
+    border-right: 1px solid var(--rpw-border);
+    border-bottom: 1px solid var(--rpw-border);
+    background: var(--rpw-cell-bg);
+}
+
+.rpw-resource-spacer-cell {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: var(--rpw-resource-bg);
 }
 
 .rpw-entry-stack {

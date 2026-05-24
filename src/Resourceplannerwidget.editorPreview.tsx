@@ -32,6 +32,7 @@ export function preview(): ReactElement {
             isLoadingEntries={false}
             resourceColumnWidth={220}
             dayColumnMinWidth={128}
+            visibleResourceRows={8}
             heightMode="auto"
             onResourceClick={() => undefined}
             onEntryClick={() => undefined}

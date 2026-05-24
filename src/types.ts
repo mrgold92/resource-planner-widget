@@ -51,6 +51,7 @@ export interface PlannerGridProps {
     isLoadingEntries: boolean;
     resourceColumnWidth: number;
     dayColumnMinWidth: number;
+    visibleResourceRows: number;
     heightMode: HeightMode;
     onResourceClick(resource: PlannerResource): void;
     onEntryClick(entry: PlannerEntry): void;

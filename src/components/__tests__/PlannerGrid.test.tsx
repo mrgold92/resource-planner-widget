@@ -61,6 +61,7 @@ function renderPlanner(overrides: Partial<Parameters<typeof PlannerGrid>[0]> = {
             isLoadingEntries={false}
             resourceColumnWidth={220}
             dayColumnMinWidth={128}
+            visibleResourceRows={12}
             heightMode="auto"
             onResourceClick={() => undefined}
             onEntryClick={() => undefined}

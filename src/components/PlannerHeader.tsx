@@ -22,6 +22,7 @@ export function PlannerHeader({ monthLabel, days }: PlannerHeaderProps): ReactEl
                     })}
                     role="columnheader"
                     aria-label={day.dateKey}
+                    data-date-key={day.dateKey}
                 >
                     <span className="rpw-weekday">{day.weekdayLabel}</span>
                     <span className="rpw-day-number">{day.dayOfMonth}</span>

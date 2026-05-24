@@ -48,6 +48,7 @@ export function Resourceplannerwidget(props: ResourceplannerwidgetContainerProps
             isLoadingEntries={isLoadingEntries}
             resourceColumnWidth={props.resourceColumnWidth}
             dayColumnMinWidth={props.dayColumnMinWidth}
+            visibleResourceRows={props.visibleResourceRows}
             heightMode={props.heightMode as HeightMode}
             onResourceClick={resource => {
                 const action = actionFor(props.onResourceClick, resource.item);
