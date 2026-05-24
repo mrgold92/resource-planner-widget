@@ -73,3 +73,8 @@ npm.cmd run build
 ```
 
 The MPK is generated as `dist/0.1.2/ResourcePlannerWidget.mpk`.
+
+## Inspiration
+
+This widget was inspired by [mendix-planner-widget](https://github.com/mendixlabs/mendix-planner-widget) by Mendix Labs (Apache 2.0).
+It shares the same concept — a monthly planning grid for Mendix — but is a full rewrite with a different architecture, API, and feature set.
