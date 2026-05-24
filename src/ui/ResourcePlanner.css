@@ -28,6 +28,12 @@
     isolation: isolate;
 }
 
+.rpw-height-auto {
+    /* In Auto mode, cap height to viewport to prevent page scrolling */
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
 .rpw-height-fill {
     display: flex;
     flex-direction: column;
