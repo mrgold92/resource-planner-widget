@@ -10,71 +10,43 @@
     --rpw-accent: #2563eb;
     position: relative;
     display: block;
-    /* flex-basis: 0 prevents content-size from leaking to Mendix flex ancestors */
-    flex: 1 1 0%;
     width: 100%;
-    inline-size: 100%;
     max-width: 100%;
-    min-width: 0;
-    min-inline-size: 0;
-    min-height: 0;
-    min-block-size: 0;
-    /* overflow: clip clips without creating a scroll container, avoiding
-       interference with Mendix's own overflow: auto on scroll containers */
-    overflow: clip;
+    overflow: hidden;
     color: var(--rpw-text);
     font-family: inherit;
-    contain: layout style paint;
-    isolation: isolate;
-}
-
-.rpw-height-auto {
-    /* In Auto mode, don't override the injected --rpw-grid-max-height */
-}
-
-.rpw-height-auto .rpw-scroll {
-    /* Remove override - let var(--rpw-grid-max-height) from base selector work */
-}
-
-.rpw-height-fill {
-    display: flex;
-    flex-direction: column;
-    /* Use max-height instead of height: 100% to avoid expanding beyond viewport */
-    max-height: calc(100vh - 120px);
-    min-height: 0;
 }
 
 .rpw-planner .rpw-scroll {
-    /* Scroll viewport: clips the inner grid, never expands beyond the widget */
     position: relative;
-    flex: 1 1 auto;
     overflow: auto;
     overscroll-behavior: contain;
     max-height: var(--rpw-grid-max-height);
     width: 100%;
-    inline-size: 100%;
     max-width: 100%;
-    min-width: 0;
-    min-inline-size: 0;
     min-height: 0;
-    min-block-size: 0;
     border: 1px solid var(--rpw-border);
     border-radius: 6px;
     background: var(--rpw-cell-bg);
 }
 
+.rpw-height-fill {
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 120px);
+    min-height: 0;
+}
+
 .rpw-height-fill .rpw-scroll {
-    /* In fill mode, let the flex grow but limit to calculated height */
-    max-height: var(--rpw-grid-max-height);
+    flex: 1 1 auto;
+    max-height: none;
 }
 
 .rpw-planner .rpw-grid {
-    /* CSS grid: grows to max-content width; contained by the scroll viewport above */
     display: grid;
     grid-template-columns: var(--rpw-resource-column-width) repeat(var(--rpw-day-count), var(--rpw-day-column-min-width));
     width: max-content;
     min-width: 100%;
-    max-width: none;
 }
 
 .rpw-planner .rpw-header-row,
@@ -153,7 +125,6 @@
     width: 100%;
     min-width: var(--rpw-resource-column-width);
     padding: 12px 14px;
-    border: 0;
     border-right: 1px solid var(--rpw-border);
     border-bottom: 1px solid var(--rpw-border);
     background: var(--rpw-resource-bg);
@@ -247,22 +218,6 @@
     width: 46%;
 }
 
-@keyframes rpw-skeleton-shimmer {
-    0% {
-        background-position: 120% 0;
-    }
-
-    100% {
-        background-position: -120% 0;
-    }
-}
-
-/* Override Mendix Atlas Core's flex: 1 1 auto on wrapper
-   When widget is in Auto mode, limit the scroll container to viewport */
-.mx-scrollcontainer-wrapper {
-    max-height: 100vh;
-}
-
 .rpw-planner .rpw-entry-card {
     display: flex;
     flex-direction: column;
@@ -340,6 +295,21 @@
     border-radius: 6px;
     color: var(--rpw-muted, #667085);
     background: #ffffff;
+}
+
+/* Override Mendix Atlas Core to contain scroll */
+.mx-scrollcontainer-wrapper {
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+@keyframes rpw-skeleton-shimmer {
+    0% {
+        background-position: 120% 0;
+    }
+    100% {
+        background-position: -120% 0;
+    }
 }
 
 @media (max-width: 640px) {

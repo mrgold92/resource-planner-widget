@@ -57,6 +57,24 @@ export function PlannerGrid({
 
     useEffect(() => {
         const scrollElement = scrollRef.current;
+        if (!scrollElement) return;
+
+        // Find Mendix scroll wrapper and force max-height
+        let ancestor = scrollElement.parentElement;
+        while (ancestor) {
+            if (ancestor.classList.contains("mx-scrollcontainer-wrapper")) {
+                ancestor.style.maxHeight = "100vh";
+                ancestor.style.overflowY = "auto";
+                ancestor.style.display = "flex";
+                ancestor.style.flexDirection = "column";
+                break;
+            }
+            ancestor = ancestor.parentElement;
+        }
+    }, []);
+
+    useEffect(() => {
+        const scrollElement = scrollRef.current;
         const today = days.find(day => day.isToday);
 
         if (!scrollElement || !today) {
