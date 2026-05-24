@@ -31,7 +31,8 @@
 .rpw-height-fill {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    /* Use max-height instead of height: 100% to avoid expanding beyond viewport */
+    max-height: calc(100vh - 120px);
     min-height: 0;
 }
 
@@ -55,7 +56,8 @@
 }
 
 .rpw-height-fill .rpw-scroll {
-    max-height: none;
+    /* In fill mode, let the flex grow but limit to calculated height */
+    max-height: var(--rpw-grid-max-height);
 }
 
 .rpw-planner .rpw-grid {
