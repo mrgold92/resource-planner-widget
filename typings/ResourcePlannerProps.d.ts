@@ -4,16 +4,7 @@
  * @author Mendix Widgets Framework Team
  */
 import { CSSProperties } from "react";
-import {
-    ActionValue,
-    EditableValue,
-    ListValue,
-    Option,
-    ListActionValue,
-    ListAttributeValue,
-    ListExpressionValue,
-    ListReferenceValue
-} from "mendix";
+import { ActionValue, EditableValue, ListValue, Option, ListActionValue, ListAttributeValue, ListExpressionValue, ListReferenceValue } from "mendix";
 
 export type FirstDayOfWeekEnum = "monday" | "sunday";
 

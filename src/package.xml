@@ -5,7 +5,7 @@
             <widgetFile path="ResourcePlanner.xml"/>
         </widgetFiles>
         <files>
-            <file path="davidsalazar/resourceplanner/resourceplanner"/>
+            <file path="davidsalazar/resourceplanner"/>
         </files>
     </clientModule>
 </package>
