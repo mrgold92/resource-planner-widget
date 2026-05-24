@@ -116,6 +116,7 @@
     width: 100%;
     min-width: var(--rpw-resource-column-width);
     padding: 12px 14px;
+    border: none;
     border-right: 1px solid var(--rpw-border);
     border-bottom: 1px solid var(--rpw-border);
     background: var(--rpw-resource-bg);
