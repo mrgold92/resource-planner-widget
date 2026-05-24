@@ -4,7 +4,7 @@ Modern pluggable web widget for monthly resource planning.
 
 The widget shows resources as rows and days as columns, with multiple entry cards per resource/day cell. It includes sticky headers, virtual resource-row scrolling, loading skeletons, and actions for resources, entries, and empty cells.
 
-This is a personal open-source project by David Salazar Rodero. 
+This is a personal open-source project by David Salazar Rodero.
 
 ## Status
 
