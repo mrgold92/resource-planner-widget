@@ -45,7 +45,6 @@ export function PlannerGrid({
         ? Math.max(resources.length - firstVisibleResourceIndex - virtualResources.length, 0)
         : 0;
     const gridStyle = {
-        ...style,
         "--rpw-resource-column-width": `${Math.max(resourceColumnWidth, 140)}px`,
         "--rpw-day-column-min-width": `${Math.max(dayColumnMinWidth, 72)}px`,
         "--rpw-day-count": days.length,
@@ -87,13 +86,14 @@ export function PlannerGrid({
     return (
         <section
             className={classNames("rpw-planner", `rpw-height-${heightMode}`, className)}
-            style={gridStyle}
+            style={style}
             tabIndex={tabIndex}
             aria-label={`Resource planner for ${monthLabel}`}
         >
             <div
                 ref={scrollRef}
                 className="rpw-scroll"
+                style={gridStyle}
                 onScroll={handleScroll}
                 role="grid"
                 aria-rowcount={resources.length + 1}
