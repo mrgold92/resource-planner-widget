@@ -10,6 +10,7 @@
     --rpw-accent: #2563eb;
     position: relative;
     display: block;
+    contain: inline-size;
     width: 100%;
     max-width: 100%;
     overflow: clip;
