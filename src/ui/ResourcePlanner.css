@@ -29,17 +29,15 @@
 }
 
 .rpw-height-auto {
-    /* In Auto mode, cap height to viewport and force scroll within widget */
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 200px);
-    overflow: auto;
+    /* In Auto mode, don't set explicit height - let scroll container handle it */
+    display: block;
+    overflow: visible;
 }
 
 .rpw-height-auto .rpw-scroll {
-    /* Override base scroll style - let flex grow to fill available space */
-    flex: 1 1 auto;
-    max-height: none;
+    /* In Auto mode, scroll at viewport height - don't rely on parent height */
+    max-height: 100vh;
+    height: auto;
 }
 
 .rpw-height-fill {
