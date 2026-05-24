@@ -257,6 +257,12 @@
     }
 }
 
+/* Override Mendix Atlas Core's flex: 1 1 auto on wrapper
+   When widget is in Auto mode, limit the scroll container to viewport */
+.mx-scrollcontainer-wrapper {
+    max-height: 100vh;
+}
+
 .rpw-planner .rpw-entry-card {
     display: flex;
     flex-direction: column;
