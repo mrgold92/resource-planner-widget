@@ -57,7 +57,9 @@ export function PlannerGrid({
 
     useEffect(() => {
         const scrollEl = scrollRef.current;
-        if (heightMode !== "fill" || !scrollEl) return;
+        if (heightMode !== "fill" || !scrollEl) {
+            return;
+        }
 
         // In fill mode: measure the distance from the scroll container's top edge
         // to the bottom of the viewport and use that as max-height. This makes the
