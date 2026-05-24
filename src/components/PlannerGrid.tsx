@@ -26,10 +26,8 @@ export function PlannerGrid({
     onEntryClick,
     onEmptyCellClick
 }: PlannerGridProps): ReactElement {
-    const sectionRef = useRef<HTMLElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
     const [scrollTop, setScrollTop] = useState(0);
-    const [containerWidth, setContainerWidth] = useState<number>(0);
     const normalizedVisibleRows = Math.max(1, Math.floor(visibleResourceRows || 12));
     const shouldVirtualizeRows = resources.length > normalizedVisibleRows;
     const firstVisibleResourceIndex = shouldVirtualizeRows
@@ -46,29 +44,16 @@ export function PlannerGrid({
     const bottomSpacerRows = shouldVirtualizeRows
         ? Math.max(resources.length - firstVisibleResourceIndex - virtualResources.length, 0)
         : 0;
-    const gridStyle = {
+
+    // CSS custom properties live on the scroll viewport so they are available
+    // to the inner grid and its children via inheritance, without leaking to
+    // Mendix ancestor elements.
+    const scrollStyle = {
         "--rpw-resource-column-width": `${Math.max(resourceColumnWidth, 140)}px`,
         "--rpw-day-column-min-width": `${Math.max(dayColumnMinWidth, 72)}px`,
         "--rpw-day-count": days.length,
-        "--rpw-grid-max-height": `${HEADER_HEIGHT + normalizedVisibleRows * RESOURCE_ROW_HEIGHT}px`,
-        // Explicit pixel width breaks the CSS min-content size propagation to Mendix parent flex items
-        width: containerWidth > 0 ? containerWidth : "100%"
+        "--rpw-grid-max-height": `${HEADER_HEIGHT + normalizedVisibleRows * RESOURCE_ROW_HEIGHT}px`
     } as import("react").CSSProperties;
-
-    useEffect(() => {
-        const section = sectionRef.current;
-        if (!section) {
-            return;
-        }
-        const observer = new ResizeObserver(entries => {
-            const width = entries[0]?.contentRect.width;
-            if (width != null && width > 0) {
-                setContainerWidth(width);
-            }
-        });
-        observer.observe(section);
-        return () => observer.disconnect();
-    }, []);
 
     useEffect(() => {
         const scrollElement = scrollRef.current;
@@ -104,40 +89,40 @@ export function PlannerGrid({
 
     return (
         <section
-            ref={sectionRef}
             className={classNames("rpw-planner", `rpw-height-${heightMode}`, className)}
             style={style}
             tabIndex={tabIndex}
             aria-label={`Resource planner for ${monthLabel}`}
         >
-            <div
-                ref={scrollRef}
-                className="rpw-scroll"
-                style={gridStyle}
-                onScroll={handleScroll}
-                role="grid"
-                aria-rowcount={resources.length + 1}
-                aria-colcount={days.length + 1}
-            >
-                <PlannerHeader monthLabel={monthLabel} days={days} />
-                {renderSpacerRows("top-spacer", topSpacerRows, days)}
-                {virtualResources.map(resource => (
-                    <ResourceRow
-                        key={resource.id}
-                        resource={resource}
-                        days={days}
-                        entriesByCell={entriesByCell}
-                        isLoadingEntries={isLoadingEntries}
-                        onResourceClick={onResourceClick}
-                        onEntryClick={onEntryClick}
-                        onEmptyCellClick={onEmptyCellClick}
-                    />
-                ))}
-                {renderSpacerRows("bottom-spacer", bottomSpacerRows, days)}
-                {isEntriesEmpty && !isLoadingEntries ? (
-                    <div className="rpw-empty-overlay">No entries this month</div>
-                ) : null}
-                {isLoadingEntries ? <div className="rpw-loading-overlay">Loading entries</div> : null}
+            {/* rpw-scroll: overflow viewport — width 100%, clips everything inside */}
+            <div ref={scrollRef} className="rpw-scroll" style={scrollStyle} onScroll={handleScroll}>
+                {/* rpw-grid: actual CSS grid — width: max-content so it never constrains the viewport */}
+                <div
+                    className="rpw-grid"
+                    role="grid"
+                    aria-rowcount={resources.length + 1}
+                    aria-colcount={days.length + 1}
+                >
+                    <PlannerHeader monthLabel={monthLabel} days={days} />
+                    {renderSpacerRows("top-spacer", topSpacerRows, days)}
+                    {virtualResources.map(resource => (
+                        <ResourceRow
+                            key={resource.id}
+                            resource={resource}
+                            days={days}
+                            entriesByCell={entriesByCell}
+                            isLoadingEntries={isLoadingEntries}
+                            onResourceClick={onResourceClick}
+                            onEntryClick={onEntryClick}
+                            onEmptyCellClick={onEmptyCellClick}
+                        />
+                    ))}
+                    {renderSpacerRows("bottom-spacer", bottomSpacerRows, days)}
+                    {isEntriesEmpty && !isLoadingEntries ? (
+                        <div className="rpw-empty-overlay">No entries this month</div>
+                    ) : null}
+                    {isLoadingEntries ? <div className="rpw-loading-overlay">Loading entries</div> : null}
+                </div>
             </div>
         </section>
     );

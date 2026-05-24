@@ -24,9 +24,8 @@
 }
 
 .rpw-planner .rpw-scroll {
+    /* Scroll viewport: clips the inner grid, never expands beyond the widget */
     position: relative;
-    display: grid;
-    grid-template-columns: var(--rpw-resource-column-width) repeat(var(--rpw-day-count), var(--rpw-day-column-min-width));
     overflow: auto;
     max-height: var(--rpw-grid-max-height);
     width: 100%;
@@ -34,6 +33,14 @@
     border: 1px solid var(--rpw-border);
     border-radius: 6px;
     background: var(--rpw-cell-bg);
+}
+
+.rpw-planner .rpw-grid {
+    /* CSS grid: grows to max-content width; contained by the scroll viewport above */
+    display: grid;
+    grid-template-columns: var(--rpw-resource-column-width) repeat(var(--rpw-day-count), var(--rpw-day-column-min-width));
+    width: max-content;
+    min-width: 100%;
 }
 
 .rpw-planner .rpw-header-row,
