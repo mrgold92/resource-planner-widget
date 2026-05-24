@@ -1,5 +1,7 @@
 # Resource Planner Widget
 
+![Resource Planner](assets/resource-planner-cover-600x420.jpg)
+
 Modern pluggable web widget for monthly resource planning.
 
 The widget shows resources as rows and days as columns, with multiple entry cards per resource/day cell. It includes sticky headers and first column, virtual resource-row scrolling, loading skeletons, and actions for resources, entries, and empty cells.
