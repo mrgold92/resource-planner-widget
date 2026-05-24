@@ -61,14 +61,16 @@ export function PlannerGrid({
 
         // Mendix Atlas Core wraps widgets in .mx-scrollcontainer-wrapper with flex: 1 1 auto
         // and no height constraint, causing it to grow infinitely and trigger page scrolling.
-        // We cap it at 100vh to contain the widget's overflow without affecting the page.
+        // We need to cap it AND add min-height: 0 to prevent flex item from expanding children.
         let ancestor = scrollElement.parentElement;
         while (ancestor) {
             if (ancestor.classList.contains("mx-scrollcontainer-wrapper")) {
                 ancestor.style.maxHeight = "100vh";
                 ancestor.style.overflowY = "auto";
+                ancestor.style.overflowX = "hidden";
                 ancestor.style.display = "flex";
                 ancestor.style.flexDirection = "column";
+                ancestor.style.minHeight = "0";
                 break;
             }
             ancestor = ancestor.parentElement;

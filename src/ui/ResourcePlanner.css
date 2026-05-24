@@ -12,8 +12,7 @@
     display: block;
     width: 100%;
     max-width: 100%;
-    overflow: auto;
-    overscroll-behavior: contain;
+    overflow: clip;
     color: var(--rpw-text);
     font-family: inherit;
 }
@@ -31,12 +30,17 @@
     background: var(--rpw-cell-bg);
 }
 
-.rpw-height-fill .rpw-scroll {
-    max-height: 100vh;
-    overflow-y: auto;
-    overflow-x: auto;
+.rpw-height-fill {
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    min-height: 0;
 }
 
+.rpw-height-fill .rpw-scroll {
+    flex: 1 1 auto;
+    max-height: none;
+}
 .rpw-planner .rpw-grid {
     display: grid;
     grid-template-columns: var(--rpw-resource-column-width) repeat(var(--rpw-day-count), var(--rpw-day-column-min-width));
