@@ -1,5 +1,5 @@
 {
-  "extends": "@platform/pluggable-widgets-tools/configs/tsconfig.base",
+  "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
   "compilerOptions": {
     "moduleResolution": "bundler"
   },

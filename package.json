@@ -10,10 +10,10 @@
   },
   "license": "Apache-2.0",
   "config": {
-    "platformHost": "http://localhost:8080",
+    "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },
-  "packagePath": "davidsalazar",
+  "packagePath": "davidsalazar.resourceplanner",
   "scripts": {
     "start": "pluggable-widgets-tools start:server",
     "dev": "pluggable-widgets-tools start:web",
@@ -25,7 +25,7 @@
     "release": "node scripts/release.js"
   },
   "devDependencies": {
-    "@platform/pluggable-widgets-tools": "^11.6.0",
+    "@mendix/pluggable-widgets-tools": "^11.6.0",
     "@types/big.js": "^6.0.2"
   },
   "dependencies": {
