@@ -1,0 +1,7 @@
+{
+  "extends": "@platform/pluggable-widgets-tools/configs/tsconfig.base",
+  "compilerOptions": {
+    "moduleResolution": "bundler"
+  },
+  "include": ["./src", "./typings"]
+}

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="siemens.resourceplannerwidget.Resourceplannerwidget" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Web"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Resource Planner</name>
+    <description>Display a monthly planning grid with resources as rows and days as columns.</description>
+    <studioCategory>Planning</studioCategory>
+    <icon/>
+    <properties>
+        <propertyGroup caption="View">
+            <property key="visibleMonthAttribute" type="attribute">
+                <caption>Visible month attribute</caption>
+                <description>DateTime attribute whose month and year define the visible planner month.</description>
+                <attributeTypes>
+                    <attributeType name="DateTime"/>
+                </attributeTypes>
+            </property>
+            <property key="showWeekends" type="boolean" defaultValue="true">
+                <caption>Show weekends</caption>
+                <description>Determines whether Saturday and Sunday columns are displayed.</description>
+            </property>
+            <property key="firstDayOfWeek" type="enumeration" defaultValue="monday">
+                <caption>First day of week</caption>
+                <description>Controls weekday labels used by the planner.</description>
+                <enumerationValues>
+                    <enumerationValue key="monday">Monday</enumerationValue>
+                    <enumerationValue key="sunday">Sunday</enumerationValue>
+                </enumerationValues>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Resources">
+            <property key="resourcesDatasource" type="datasource" isList="true">
+                <caption>Resources data source</caption>
+                <description>List of resources to display as planner rows.</description>
+            </property>
+            <property key="resourceTitle" type="textTemplate" dataSource="resourcesDatasource">
+                <caption>Resource title</caption>
+                <description>Text displayed in the sticky resource column.</description>
+            </property>
+            <property key="resourceSubtitle" type="textTemplate" dataSource="resourcesDatasource" required="false">
+                <caption>Resource subtitle</caption>
+                <description>Optional secondary text displayed below the resource title.</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Entries">
+            <property key="entriesDatasource" type="datasource" isList="true" required="false">
+                <caption>Entries data source</caption>
+                <description>List of entries to display in the planner. Filter to the visible month in the Mendix model when needed.</description>
+            </property>
+            <property key="entryResourceAssociation" type="association" dataSource="entriesDatasource" selectableObjects="resourcesDatasource">
+                <caption>Resource association</caption>
+                <description>Reference from each entry to the resource row it belongs to.</description>
+                <associationTypes>
+                    <associationType name="Reference"/>
+                </associationTypes>
+            </property>
+            <property key="entryDateAttribute" type="attribute" dataSource="entriesDatasource">
+                <caption>Entry date</caption>
+                <description>DateTime attribute used to place the entry in a day cell.</description>
+                <attributeTypes>
+                    <attributeType name="DateTime"/>
+                </attributeTypes>
+            </property>
+            <property key="entryTitle" type="textTemplate" dataSource="entriesDatasource">
+                <caption>Entry title</caption>
+                <description>Primary text displayed on each entry card.</description>
+            </property>
+            <property key="entrySubtitle" type="textTemplate" dataSource="entriesDatasource" required="false">
+                <caption>Entry subtitle</caption>
+                <description>Optional secondary text displayed on each entry card.</description>
+            </property>
+            <property key="entryColorClass" type="textTemplate" dataSource="entriesDatasource" required="false">
+                <caption>Entry color class</caption>
+                <description>Optional CSS class appended to entry cards for custom color styling.</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Actions">
+            <property key="onResourceClick" type="action" dataSource="resourcesDatasource" required="false">
+                <caption>On resource click</caption>
+                <description>Action executed when a resource row header is clicked.</description>
+            </property>
+            <property key="onEntryClick" type="action" dataSource="entriesDatasource" required="false">
+                <caption>On entry click</caption>
+                <description>Action executed when an entry card is clicked.</description>
+            </property>
+            <property key="onEmptyCellClick" type="action" required="false">
+                <caption>On empty cell click</caption>
+                <description>Action executed when an empty resource/day cell is clicked. Provides resourceGuid and date action variables.</description>
+                <actionVariables>
+                    <actionVariable key="resourceGuid" type="String" caption="Resource GUID"/>
+                    <actionVariable key="date" type="DateTime" caption="Date"/>
+                </actionVariables>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Appearance">
+            <property key="resourceColumnWidth" type="integer" defaultValue="220">
+                <caption>Resource column width</caption>
+                <description>Width in pixels of the sticky resource column.</description>
+            </property>
+            <property key="dayColumnMinWidth" type="integer" defaultValue="128">
+                <caption>Day column minimum width</caption>
+                <description>Minimum width in pixels of each day column.</description>
+            </property>
+            <property key="heightMode" type="enumeration" defaultValue="auto">
+                <caption>Height mode</caption>
+                <description>Controls how much vertical space the planner uses.</description>
+                <enumerationValues>
+                    <enumerationValue key="auto">Auto</enumerationValue>
+                    <enumerationValue key="fill">Fill parent</enumerationValue>
+                </enumerationValues>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Common">
+            <systemProperty key="Name"/>
+            <systemProperty key="TabIndex"/>
+            <systemProperty key="Visibility"/>
+        </propertyGroup>
+    </properties>
+</widget>
