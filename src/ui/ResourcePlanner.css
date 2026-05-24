@@ -12,7 +12,8 @@
     display: block;
     width: 100%;
     max-width: 100%;
-    overflow: hidden;
+    overflow: auto;
+    overscroll-behavior: contain;
     color: var(--rpw-text);
     font-family: inherit;
 }
@@ -31,9 +32,10 @@
 }
 
 .rpw-height-fill .rpw-scroll {
-    max-height: calc(100vh - 120px);
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow-x: auto;
 }
-
 
 .rpw-planner .rpw-grid {
     display: grid;
