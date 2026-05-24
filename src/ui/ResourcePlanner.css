@@ -20,6 +20,10 @@
 
 .rpw-planner .rpw-scroll {
     position: relative;
+    display: grid;
+    grid-template-columns: var(--rpw-resource-column-width) repeat(var(--rpw-day-count), var(--rpw-day-column-min-width));
+    justify-content: start;
+    align-content: start;
     overflow: auto;
     overscroll-behavior: contain;
     max-height: var(--rpw-grid-max-height);
@@ -33,11 +37,6 @@
 
 .rpw-height-fill .rpw-scroll {
     max-height: none;
-}
-.rpw-planner .rpw-grid {
-    display: grid;
-    grid-template-columns: var(--rpw-resource-column-width) repeat(var(--rpw-day-count), var(--rpw-day-column-min-width));
-    min-width: 100%;
 }
 
 .rpw-planner .rpw-header-row,

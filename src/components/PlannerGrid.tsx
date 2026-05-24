@@ -116,35 +116,37 @@ export function PlannerGrid({
             tabIndex={tabIndex}
             aria-label={`Resource planner for ${monthLabel}`}
         >
-            {/* rpw-scroll: overflow viewport; width 100%, clips everything inside */}
-            <div ref={scrollRef} className="rpw-scroll" style={scrollStyle} onScroll={handleScroll}>
-                {/* rpw-grid: actual CSS grid; width: max-content so it never constrains the viewport */}
-                <div
-                    className="rpw-grid"
-                    role="grid"
-                    aria-rowcount={resources.length + 1}
-                    aria-colcount={days.length + 1}
-                >
-                    <PlannerHeader monthLabel={monthLabel} days={days} />
-                    {renderSpacerRows("top-spacer", topSpacerRows, days)}
-                    {virtualResources.map(resource => (
-                        <ResourceRow
-                            key={resource.id}
-                            resource={resource}
-                            days={days}
-                            entriesByCell={entriesByCell}
-                            isLoadingEntries={isLoadingEntries}
-                            onResourceClick={onResourceClick}
-                            onEntryClick={onEntryClick}
-                            onEmptyCellClick={onEmptyCellClick}
-                        />
-                    ))}
-                    {renderSpacerRows("bottom-spacer", bottomSpacerRows, days)}
-                    {isEntriesEmpty && !isLoadingEntries ? (
-                        <div className="rpw-empty-overlay">No entries this month</div>
-                    ) : null}
-                    {isLoadingEntries ? <div className="rpw-loading-overlay">Loading entries</div> : null}
-                </div>
+            {/* rpw-scroll is also the grid container so that position:sticky on grid items
+                always references the actual scroll container, avoiding the Chrome bug where
+                sticky fails mid-scroll when the grid container and scroll container differ */}
+            <div
+                ref={scrollRef}
+                className="rpw-scroll"
+                role="grid"
+                aria-rowcount={resources.length + 1}
+                aria-colcount={days.length + 1}
+                style={scrollStyle}
+                onScroll={handleScroll}
+            >
+                <PlannerHeader monthLabel={monthLabel} days={days} />
+                {renderSpacerRows("top-spacer", topSpacerRows, days)}
+                {virtualResources.map(resource => (
+                    <ResourceRow
+                        key={resource.id}
+                        resource={resource}
+                        days={days}
+                        entriesByCell={entriesByCell}
+                        isLoadingEntries={isLoadingEntries}
+                        onResourceClick={onResourceClick}
+                        onEntryClick={onEntryClick}
+                        onEmptyCellClick={onEmptyCellClick}
+                    />
+                ))}
+                {renderSpacerRows("bottom-spacer", bottomSpacerRows, days)}
+                {isEntriesEmpty && !isLoadingEntries ? (
+                    <div className="rpw-empty-overlay">No entries this month</div>
+                ) : null}
+                {isLoadingEntries ? <div className="rpw-loading-overlay">Loading entries</div> : null}
             </div>
         </section>
     );
