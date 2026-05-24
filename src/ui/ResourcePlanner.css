@@ -297,12 +297,6 @@
     background: #ffffff;
 }
 
-/* Override Mendix Atlas Core to contain scroll */
-.mx-scrollcontainer-wrapper {
-    max-height: 100vh;
-    overflow-y: auto;
-}
-
 @keyframes rpw-skeleton-shimmer {
     0% {
         background-position: 120% 0;
