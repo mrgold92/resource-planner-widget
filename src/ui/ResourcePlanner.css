@@ -30,17 +30,10 @@
     background: var(--rpw-cell-bg);
 }
 
-.rpw-height-fill {
-    display: flex;
-    flex-direction: column;
+.rpw-height-fill .rpw-scroll {
     max-height: calc(100vh - 120px);
-    min-height: 0;
 }
 
-.rpw-height-fill .rpw-scroll {
-    flex: 1 1 auto;
-    max-height: none;
-}
 
 .rpw-planner .rpw-grid {
     display: grid;
