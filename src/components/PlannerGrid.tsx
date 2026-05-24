@@ -94,9 +94,9 @@ export function PlannerGrid({
             tabIndex={tabIndex}
             aria-label={`Resource planner for ${monthLabel}`}
         >
-            {/* rpw-scroll: overflow viewport — width 100%, clips everything inside */}
+            {/* rpw-scroll: overflow viewport; width 100%, clips everything inside */}
             <div ref={scrollRef} className="rpw-scroll" style={scrollStyle} onScroll={handleScroll}>
-                {/* rpw-grid: actual CSS grid — width: max-content so it never constrains the viewport */}
+                {/* rpw-grid: actual CSS grid; width: max-content so it never constrains the viewport */}
                 <div
                     className="rpw-grid"
                     role="grid"

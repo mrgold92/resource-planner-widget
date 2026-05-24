@@ -9,30 +9,53 @@
     --rpw-muted: #667085;
     --rpw-accent: #2563eb;
     position: relative;
+    display: block;
+    /* flex-basis: 0 prevents content-size from leaking to Mendix flex ancestors */
+    flex: 1 1 0%;
     width: 100%;
+    inline-size: 100%;
     max-width: 100%;
     min-width: 0;
-    overflow: hidden;
+    min-inline-size: 0;
+    min-height: 0;
+    min-block-size: 0;
+    /* overflow: clip clips without creating a scroll container, avoiding
+       interference with Mendix's own overflow: auto on scroll containers */
+    overflow: clip;
     color: var(--rpw-text);
     font-family: inherit;
-    contain: layout style;
+    contain: layout style paint;
+    isolation: isolate;
 }
 
 .rpw-height-fill {
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    min-height: 320px;
+    min-height: 0;
 }
 
 .rpw-planner .rpw-scroll {
     /* Scroll viewport: clips the inner grid, never expands beyond the widget */
     position: relative;
+    flex: 1 1 auto;
     overflow: auto;
+    overscroll-behavior: contain;
     max-height: var(--rpw-grid-max-height);
     width: 100%;
+    inline-size: 100%;
     max-width: 100%;
+    min-width: 0;
+    min-inline-size: 0;
+    min-height: 0;
+    min-block-size: 0;
     border: 1px solid var(--rpw-border);
     border-radius: 6px;
     background: var(--rpw-cell-bg);
+}
+
+.rpw-height-fill .rpw-scroll {
+    max-height: none;
 }
 
 .rpw-planner .rpw-grid {
@@ -41,6 +64,7 @@
     grid-template-columns: var(--rpw-resource-column-width) repeat(var(--rpw-day-count), var(--rpw-day-column-min-width));
     width: max-content;
     min-width: 100%;
+    max-width: none;
 }
 
 .rpw-planner .rpw-header-row,
