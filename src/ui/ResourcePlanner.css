@@ -11,9 +11,11 @@
     position: relative;
     width: 100%;
     max-width: 100%;
+    min-width: 0;
     overflow: hidden;
     color: var(--rpw-text);
     font-family: inherit;
+    contain: layout style;
 }
 
 .rpw-height-fill {
@@ -27,6 +29,7 @@
     grid-template-columns: var(--rpw-resource-column-width) repeat(var(--rpw-day-count), minmax(var(--rpw-day-column-min-width), 1fr));
     overflow: auto;
     max-height: var(--rpw-grid-max-height);
+    max-width: 100%;
     border: 1px solid var(--rpw-border);
     border-radius: 6px;
     background: var(--rpw-cell-bg);
