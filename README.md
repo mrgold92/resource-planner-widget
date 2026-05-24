@@ -58,6 +58,10 @@ Use **On resource click**, **On entry click**, and **On empty cell click** to op
 - `resourceGuid` (String) — GUID of the clicked resource.
 - `date` (DateTime) — date represented by the clicked cell.
 
+## Screenshots
+
+![Widget screenshot](assets/screenshotwidget.png)
+
 ## Known Limitations
 
 - No drag and drop.
