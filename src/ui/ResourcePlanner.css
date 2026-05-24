@@ -36,7 +36,6 @@
 .rpw-planner .rpw-grid {
     display: grid;
     grid-template-columns: var(--rpw-resource-column-width) repeat(var(--rpw-day-count), var(--rpw-day-column-min-width));
-    width: max-content;
     min-width: 100%;
 }
 
