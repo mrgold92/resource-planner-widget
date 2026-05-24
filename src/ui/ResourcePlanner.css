@@ -26,9 +26,10 @@
 .rpw-planner .rpw-scroll {
     position: relative;
     display: grid;
-    grid-template-columns: var(--rpw-resource-column-width) repeat(var(--rpw-day-count), minmax(var(--rpw-day-column-min-width), 1fr));
+    grid-template-columns: var(--rpw-resource-column-width) repeat(var(--rpw-day-count), var(--rpw-day-column-min-width));
     overflow: auto;
     max-height: var(--rpw-grid-max-height);
+    width: 100%;
     max-width: 100%;
     border: 1px solid var(--rpw-border);
     border-radius: 6px;
