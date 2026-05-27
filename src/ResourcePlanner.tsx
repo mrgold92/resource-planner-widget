@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useMemo } from "react";
 import { ResourcePlannerContainerProps } from "../typings/ResourcePlannerProps";
 import { PlannerGrid } from "./components/PlannerGrid";
 import { FirstDayOfWeek, HeightMode } from "./types";
@@ -9,23 +9,45 @@ import { indexEntriesByCell } from "./utils/plannerIndex";
 import "./ui/ResourcePlanner.css";
 
 export function ResourcePlanner(props: ResourcePlannerContainerProps): ReactElement {
-    const anchorDate = startOfLocalDay(props.visibleMonthAttribute.value ?? new Date());
-    const resourceItems = props.resourcesDatasource.items ?? [];
-    const entryItems = props.entriesDatasource?.items ?? [];
-    const days = getMonthDays(anchorDate, props.firstDayOfWeek as FirstDayOfWeek, props.showWeekends);
+    const visibleMonthValue = props.visibleMonthAttribute.value;
+    const resourceItems = props.resourcesDatasource.items;
+    const entryItems = props.entriesDatasource?.items;
+    const anchorDate = useMemo(() => startOfLocalDay(visibleMonthValue ?? new Date()), [visibleMonthValue]);
+    const days = useMemo(
+        () => getMonthDays(anchorDate, props.firstDayOfWeek as FirstDayOfWeek, props.showWeekends),
+        [anchorDate, props.firstDayOfWeek, props.showWeekends]
+    );
+    const visibleDateKeys = useMemo(() => new Set(days.map(day => day.dateKey)), [days]);
     const isLoadingResources = props.resourcesDatasource.status !== "available";
     const isLoadingEntries = props.entriesDatasource?.status === "loading";
-    const resources = normalizeResources(resourceItems, props.resourceTitle, props.resourceSubtitle);
-    const entries = normalizeEntries({
-        items: entryItems,
-        resources,
-        resourceAssociation: props.entryResourceAssociation,
-        dateAttribute: props.entryDateAttribute,
-        titleValues: props.entryTitle,
-        subtitleValues: props.entrySubtitle,
-        colorClassValues: props.entryColorClass
-    }).filter(entry => days.some(day => day.dateKey === entry.dateKey));
-    const entriesByCell = indexEntriesByCell(entries);
+    const resources = useMemo(
+        () => normalizeResources(resourceItems ?? [], props.resourceTitle, props.resourceSubtitle),
+        [resourceItems, props.resourceTitle, props.resourceSubtitle]
+    );
+    const entries = useMemo(
+        () =>
+            normalizeEntries({
+                items: entryItems ?? [],
+                resources,
+                visibleDateKeys,
+                resourceAssociation: props.entryResourceAssociation,
+                dateAttribute: props.entryDateAttribute,
+                titleValues: props.entryTitle,
+                subtitleValues: props.entrySubtitle,
+                colorClassValues: props.entryColorClass
+            }),
+        [
+            entryItems,
+            resources,
+            visibleDateKeys,
+            props.entryResourceAssociation,
+            props.entryDateAttribute,
+            props.entryTitle,
+            props.entrySubtitle,
+            props.entryColorClass
+        ]
+    );
+    const entriesByCell = useMemo(() => indexEntriesByCell(entries), [entries]);
 
     if (isLoadingResources) {
         return <div className="rpw-state rpw-state-loading">Loading resources</div>;

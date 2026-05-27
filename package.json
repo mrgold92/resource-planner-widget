@@ -1,7 +1,7 @@
 {
   "name": "resource-planner-widget",
   "widgetName": "ResourcePlanner",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Monthly resource planner widget.",
   "copyright": "Copyright 2026 David Salazar Rodero",
   "author": "David Salazar Rodero",
